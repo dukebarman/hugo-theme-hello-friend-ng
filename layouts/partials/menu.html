@@ -4,5 +4,16 @@
         {{ range .Site.Menus.main -}}
             <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
         {{- end }}
+		{{ if .Site.IsMultiLingual }}
+			<li>
+			{{ range .Site.Languages }}
+				{{ if eq .Lang $.Site.Language.Lang }}
+					<b>{{ .Lang }}</b>
+				{{ else }}
+					<a href="{{ . | absURL }}/posts/" data-rel="prefetch">{{ .Lang }}</a>
+				{{ end }}
+			{{ end }}
+			</li>
+		{{ end }}
     </ul>
 </nav>
